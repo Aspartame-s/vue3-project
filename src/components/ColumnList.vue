@@ -2,7 +2,10 @@
 <template>
   <div>
     <ul>
-      <li></li>
+      <li v-for="item in list" :key="item.id">
+        <img :src="item.avatar" :alt="item.title">
+        <h5>{{item.desc}}</h5>
+      </li>
     </ul>
   </div>
 </template>
