@@ -9,18 +9,37 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CloumnList, {ColumnProps} from './components/ColumnList.vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
 const list: ColumnProps[] = [
   {
     id: 1,
     title: '标题1',
-    avatar: '',
+    avatar: require('./assets/logo.png'),
     desc: '描述1'
   },
   {
     id: 2,
     title: '标题2',
-    avatar: '',
+    avatar: require('./assets/logo.png'),
     desc: '描述2'
+  },
+  {
+    id: 3,
+    title: '标题3',
+    avatar: require('./assets/logo.png'),
+    desc: '描述3'
+  },
+  {
+    id: 4,
+    title: '标题4',
+    avatar: require('./assets/logo.png'),
+    desc: '描述4'
+  },
+  {
+    id: 5,
+    title: '标题5',
+    avatar: require('./assets/logo.png'),
+    desc: '描述5'
   }
 ]
 export default defineComponent({
@@ -43,6 +62,6 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>
