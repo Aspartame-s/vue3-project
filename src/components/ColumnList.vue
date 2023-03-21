@@ -9,15 +9,15 @@
     </div>
   </div> -->
   <div class="row">
-    <div class="col-4 my-2" v-for="item in list" :key="item.id">
-      <div class="card " style="width: 18rem">
+    <div class="col-3 my-4" v-for="item in columnList" :key="item.id">
+      <div class="card h-100 ">
         <div class="card-body">
-          <img :src="item.avatar" class="card-img-top" alt="..." />
+          <img :src="item.avatar" class="rounded-circle border border-light w-25 my-3" alt="..." />
           <h5 class="card-title">{{ item.title }}</h5>
-          <p class="card-text">
+          <p class="card-text text-left">
             {{ item.desc }}
           </p>
-          <a href="#" class="btn btn-primary">进入专栏</a>
+          <a href="#" class="btn btn-outline-primary">进入专栏</a>
         </div>
       </div>
     </div>
@@ -25,11 +25,11 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 export interface ColumnProps {
   id: number;
   title: string;
-  avatar: string;
+  avatar?: string;
   desc: string;
 }
 export default defineComponent({
@@ -46,6 +46,17 @@ export default defineComponent({
   },
   setup(props) {
     // props.list[0].
+    const columnList = computed(() => {
+      return props.list.map(column => {
+        if(!column.avatar) {
+          column.avatar = require('@/assets/yiquan.jpg')
+        }
+        return column
+      })
+    })
+    return {
+      columnList
+    }
   },
 });
 </script>

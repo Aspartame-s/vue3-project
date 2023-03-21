@@ -2,6 +2,7 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
   <div>
+    <nav-bar :user="user"></nav-bar>
     <cloumn-list :list="list"></cloumn-list>
   </div>
 </template>
@@ -9,7 +10,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CloumnList, {ColumnProps} from './components/ColumnList.vue'
+import NavBar, {UserProps} from './components/NavBar.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
+const user: UserProps = {
+  isLogin: false,
+  name: '鸡汤'
+}
 const list: ColumnProps[] = [
   {
     id: 1,
@@ -20,7 +26,7 @@ const list: ColumnProps[] = [
   {
     id: 2,
     title: '标题2',
-    avatar: require('./assets/logo.png'),
+    // avatar: require('./assets/logo.png'),
     desc: '描述2'
   },
   {
@@ -45,11 +51,13 @@ const list: ColumnProps[] = [
 export default defineComponent({
   name: 'App',
   components: {
-    CloumnList
+    CloumnList,
+    NavBar
   },
   setup() {
     return {
-      list: list
+      list: list,
+      user: user
     }
   }
 })
