@@ -1,7 +1,7 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
-  <div>
+  <div class="mb-3">
     <nav-bar :user="user"></nav-bar>
     <cloumn-list :list="list"></cloumn-list>
   </div>
@@ -13,7 +13,7 @@ import CloumnList, {ColumnProps} from './components/ColumnList.vue'
 import NavBar, {UserProps} from './components/NavBar.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 const user: UserProps = {
-  isLogin: false,
+  isLogin: true,
   name: '鸡汤'
 }
 const list: ColumnProps[] = [
@@ -57,7 +57,7 @@ export default defineComponent({
   setup() {
     return {
       list: list,
-      user: user
+      user
     }
   }
 })
