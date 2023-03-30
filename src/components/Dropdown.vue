@@ -39,21 +39,6 @@ export default defineComponent({
         }
       }
     });
-
-    // const handler = (e: MouseEvent) => {
-    //   if (dropdownRef.value) {
-    //     if (!dropdownRef.value.contains(e.target as HTMLElement) && isOpen) {
-    //       isOpen.value = false;
-    //     }
-    //   }
-
-    // };
-    // onMounted(() => {
-    //   document.addEventListener("click", handler);
-    // });
-    // onUnmounted(() => {
-    //   document.removeEventListener("click", handler);
-    // });
     return {
       isOpen,
       toggleChange,

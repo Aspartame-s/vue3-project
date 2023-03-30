@@ -1,10 +1,10 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
-  <!-- <div class="mb-3">
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="mb-3">
     <nav-bar :user="user"></nav-bar>
     <cloumn-list :list="list"></cloumn-list>
-  </div> -->
+  </div>
   <form>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -71,14 +71,19 @@ const list: ColumnProps[] = [
     desc: "描述5",
   },
 ];
+interface emailProp {
+  val: string;
+  error: boolean;
+  message: string;
+}
 export default defineComponent({
   name: "App",
   components: {
-    // CloumnList,
-    // NavBar,
+    CloumnList,
+    NavBar,
   },
   setup() {
-    const emailRef = reactive({
+    const emailRef:emailProp = reactive({
       val: '',
       error: false,
       message: ''
