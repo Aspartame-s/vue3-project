@@ -6,6 +6,12 @@
     <cloumn-list :list="list"></cloumn-list>
   </div>
   <form>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+     <validate-input :rules="emailRules"></validate-input>
+    </div>
+
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input
@@ -33,6 +39,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import CloumnList, { ColumnProps } from "./components/ColumnList.vue";
+import ValidateInput, {RulesProp} from "./components/ValidateInput.vue"
 import NavBar, { UserProps } from "./components/NavBar.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 const user: UserProps = {
@@ -81,8 +88,19 @@ export default defineComponent({
   components: {
     CloumnList,
     NavBar,
+    ValidateInput
   },
   setup() {
+    const emailRules: RulesProp = [
+      {
+        type: 'required',
+        message: '邮箱不能为空'
+      },
+      {
+        type: 'email',
+        message: '请输入正确的邮箱格式'
+      }
+    ] 
     const emailRef:emailProp = reactive({
       val: '',
       error: false,
@@ -102,7 +120,8 @@ export default defineComponent({
       list: list,
       user,
       emailRef,
-      validateEmail
+      validateEmail,
+      emailRules
     };
   },
 });
