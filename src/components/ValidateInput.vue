@@ -20,6 +20,8 @@ export interface RuleProp {
   message: string;
 }
 export type RulesProp = RuleProp[];
+const emailReg =
+      /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
 export default defineComponent({
   name: "",
   props: {
@@ -31,8 +33,7 @@ export default defineComponent({
       message: "",
       error: false,
     });
-    const emailReg =
-      /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+    
     const validateInput = () => {
         const allPassed = props.rules?.every((item) => {
             inputRef.message = item.message
