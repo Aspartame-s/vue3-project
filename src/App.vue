@@ -9,9 +9,13 @@
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-     <validate-input :rules="emailRules"></validate-input>
+     <validate-input :rules="emailRules" v-model="emailVal"></validate-input>
     </div>
-
+    {{ emailVal }}
+    <!-- 问题：发现 只能写成 :modalValue="emailVal" @update:modalValue="$event => emailVal = $event"
+    原因: modalValue 名字写错了 v-model 的语法糖  是在自定义组件上的v-model相当于传递了modelValue prop并接收抛出的update:modelValue事件
+    而我写成了 modalValue 相当于自己新建的名称
+    不过vue3 可以新增多个 v-model 可以自己起名， 所以不用 v-model 语法糖时也不会出错 保证名字统一即可 不过写法还是要自己绑定属性和接收事件 -->
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input
@@ -37,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import CloumnList, { ColumnProps } from "./components/ColumnList.vue";
 import ValidateInput, {RulesProp} from "./components/ValidateInput.vue"
 import NavBar, { UserProps } from "./components/NavBar.vue";
@@ -91,6 +95,11 @@ export default defineComponent({
     ValidateInput
   },
   setup() {
+    let emailVal = ref('123')
+    // const updateValue = (e: string) => {
+    //   console.log(e)
+    //   emailVal.value = e
+    // }
     const emailRules: RulesProp = [
       {
         type: 'required',
@@ -121,7 +130,9 @@ export default defineComponent({
       user,
       emailRef,
       validateEmail,
-      emailRules
+      emailRules,
+      emailVal,
+      // updateValue
     };
   },
 });
