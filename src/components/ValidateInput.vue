@@ -9,6 +9,7 @@
       :value="inputRef.val"
       @blur="validateInput"
       @input="updateValue"
+      v-bind="$attrs"
     />
     <span v-if="inputRef.error" class="invalid-feedback">{{
       inputRef.message
@@ -17,7 +18,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType, reactive } from "vue";
+import { defineComponent, PropType, reactive, onMounted } from "vue";
 export interface RuleProp {
   type: "required" | "email";
   message: string;
@@ -26,6 +27,7 @@ export type RulesProp = RuleProp[];
 const emailReg =
   /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
 export default defineComponent({
+  inheritAttrs: false, //根组件禁止继承attribute
   name: "",
   props: {
     rules: Array as PropType<RuleProp[]>,
@@ -37,7 +39,9 @@ export default defineComponent({
       message: "",
       error: false,
     });
-
+    onMounted(() => {
+      console.log(context.attrs)
+    })
     // vue3 实现双向绑定 v-model
     const updateValue = (e: Event) => {
       const targetValue = (e.target as HTMLInputElement).value;

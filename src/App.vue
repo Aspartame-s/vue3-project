@@ -9,7 +9,7 @@
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-     <validate-input :rules="emailRules" v-model="emailVal"></validate-input>
+     <validate-input :rules="emailRules" :placeholder="'你好'" v-model="emailVal"></validate-input>
     </div>
     {{ emailVal }}
     <!-- 问题：发现 只能写成 :modalValue="emailVal" @update:modalValue="$event => emailVal = $event"
@@ -95,7 +95,7 @@ export default defineComponent({
     ValidateInput
   },
   setup() {
-    let emailVal = ref('123')
+    let emailVal = ref('')
     // const updateValue = (e: string) => {
     //   console.log(e)
     //   emailVal.value = e
