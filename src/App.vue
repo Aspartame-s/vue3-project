@@ -3,7 +3,7 @@
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   <div class="mb-3">
     <nav-bar :user="user"></nav-bar>
-    <cloumn-list :list="list"></cloumn-list>
+    <!-- <cloumn-list :list="list"></cloumn-list> -->
   </div>
   <form>
 
@@ -90,7 +90,7 @@ interface emailProp {
 export default defineComponent({
   name: "App",
   components: {
-    CloumnList,
+    // CloumnList,
     NavBar,
     ValidateInput
   },
