@@ -3,9 +3,9 @@
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   <div class="mb-3">
     <nav-bar :user="user"></nav-bar>
-    <cloumn-list :list="list"></cloumn-list>
+    <!-- <cloumn-list :list="list"></cloumn-list> -->
   </div>
-  <form>
+  <validate-form>
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -32,56 +32,60 @@
       <label for="exampleInputPassword1" class="form-label">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" />
     </div>
-    <div class="mb-3 form-check">
+    <template #submit>
+      <button type="submit" class="btn btn-warning">提交</button>
+    </template>
+    <!-- <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1" />
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    </div> -->
+    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+  </validate-form>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import CloumnList, { ColumnProps } from "./components/ColumnList.vue";
+// import CloumnList, { ColumnProps } from "./components/ColumnList.vue";
 import ValidateInput, {RulesProp} from "./components/ValidateInput.vue"
 import NavBar, { UserProps } from "./components/NavBar.vue";
+import ValidateForm from "./components/ValidateForm.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 const user: UserProps = {
   isLogin: true,
   name: "鸡汤",
 };
-const list: ColumnProps[] = [
-  {
-    id: 1,
-    title: "标题1",
-    avatar: require("./assets/logo.png"),
-    desc: "描述1",
-  },
-  {
-    id: 2,
-    title: "标题2",
-    // avatar: require('./assets/logo.png'),
-    desc: "描述2",
-  },
-  {
-    id: 3,
-    title: "标题3",
-    avatar: require("./assets/logo.png"),
-    desc: "描述3",
-  },
-  {
-    id: 4,
-    title: "标题4",
-    avatar: require("./assets/logo.png"),
-    desc: "描述4",
-  },
-  {
-    id: 5,
-    title: "标题5",
-    avatar: require("./assets/logo.png"),
-    desc: "描述5",
-  },
-];
+// const list: ColumnProps[] = [
+//   {
+//     id: 1,
+//     title: "标题1",
+//     avatar: require("./assets/logo.png"),
+//     desc: "描述1",
+//   },
+//   {
+//     id: 2,
+//     title: "标题2",
+//     // avatar: require('./assets/logo.png'),
+//     desc: "描述2",
+//   },
+//   {
+//     id: 3,
+//     title: "标题3",
+//     avatar: require("./assets/logo.png"),
+//     desc: "描述3",
+//   },
+//   {
+//     id: 4,
+//     title: "标题4",
+//     avatar: require("./assets/logo.png"),
+//     desc: "描述4",
+//   },
+//   {
+//     id: 5,
+//     title: "标题5",
+//     avatar: require("./assets/logo.png"),
+//     desc: "描述5",
+//   },
+// ];
 interface emailProp {
   val: string;
   error: boolean;
@@ -90,9 +94,10 @@ interface emailProp {
 export default defineComponent({
   name: "App",
   components: {
-    CloumnList,
+    // CloumnList,
     NavBar,
-    ValidateInput
+    ValidateInput,
+    ValidateForm
   },
   setup() {
     let emailVal = ref('')
@@ -126,7 +131,7 @@ export default defineComponent({
       }
     }
     return {
-      list: list,
+      // list: list,
       user,
       emailRef,
       validateEmail,
