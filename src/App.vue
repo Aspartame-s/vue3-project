@@ -5,7 +5,7 @@
     <nav-bar :user="user"></nav-bar>
     <!-- <cloumn-list :list="list"></cloumn-list> -->
   </div>
-  <validate-form>
+  <validate-form @form-submit="onFormSubmit">
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -100,6 +100,9 @@ export default defineComponent({
     ValidateForm
   },
   setup() {
+    const onFormSubmit = (result: boolean) => {
+      console.log(result, '1234')
+    }
     let emailVal = ref('')
     // const updateValue = (e: string) => {
     //   console.log(e)
@@ -137,6 +140,7 @@ export default defineComponent({
       validateEmail,
       emailRules,
       emailVal,
+      onFormSubmit
       // updateValue
     };
   },
