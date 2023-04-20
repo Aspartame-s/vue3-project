@@ -10,13 +10,23 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from "vue";
+import mitt, { Handler } from "mitt";
+export const mitter = mitt();
+import { defineComponent, onUnmounted } from "vue";
 export default defineComponent({
   name: "",
   setup(props, context) {
     const formSubmit = () => {
-        context.emit('form-submit', true)
+      context.emit("form-submit", true);
     };
+    const callback = (test: any) => {
+      // return result
+      console.log(test);
+    };
+    mitter.on("form-item-created", callback);
+    onUnmounted(() => {
+      mitter.off("form-item-created", callback)
+    })
     return {
       formSubmit,
     };
