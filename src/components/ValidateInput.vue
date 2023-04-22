@@ -19,9 +19,15 @@
 
 <script lang='ts'>
 import { defineComponent, PropType, reactive, onMounted } from "vue";
+import {mitter} from './ValidateForm.vue'
 export interface RuleProp {
   type: "required" | "email";
   message: string;
+}
+interface inputProp {
+  val: string,
+  message: string,
+  error: boolean
 }
 export type RulesProp = RuleProp[];
 const emailReg =
@@ -34,18 +40,16 @@ export default defineComponent({
     modelValue: String,
   },
   setup(props, context) {
-    const inputRef = reactive({
+    const inputRef: inputProp = reactive({
       val: props.modelValue || "", //将inputRef.val 的初始值赋值成 父组件传递过来的modelValue
       message: "",
       error: false,
     });
-    onMounted(() => {
-      console.log(context.attrs);
-    });
+   
     // vue3 实现双向绑定 v-model
     const updateValue = (e: Event) => {
       const targetValue = (e.target as HTMLInputElement).value;
-      console.log(e);
+      // console.log(e);
       inputRef.val = targetValue; // 在子组件中是不允许直接修改modelValue的 而且验证格式时也是判断inputRef.val 所以要将输入的值复赋值给inputRef.val
       //并将输入值传出去，在父组件中处理将传出的值赋值给传入的值 实现双向绑定
       context.emit("update:modelValue", targetValue);
@@ -71,7 +75,11 @@ export default defineComponent({
       }
       return true
     };
-
+    onMounted(() => {
+      // console.log(context.attrs);
+      // context.emit
+      mitter.emit('form-item-created', validateInput)
+    });
     // const updateValue1 = (e: Event) => {
     //   const targetValue = (e.target as HTMLInputElement).value;
     //   inputRef.val = targetValue;

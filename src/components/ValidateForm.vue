@@ -10,18 +10,24 @@
 </template>
 
 <script lang='ts'>
-import mitt, { Handler } from "mitt";
+import mitt from "mitt";
 export const mitter = mitt();
+type validateFunc = () => boolean
 import { defineComponent, onUnmounted } from "vue";
 export default defineComponent({
   name: "",
   setup(props, context) {
+    const funcArr: validateFunc[] = []
     const formSubmit = () => {
-      context.emit("form-submit", true);
+      const result = funcArr.map(func => func()).every(result => result)
+      context.emit("form-submit", result);
     };
-    const callback = (test: any) => {
+    const callback = (func: any) => {
+      funcArr.push(func)
+      console.log(funcArr)
       // return result
-      console.log(test);
+      // console.log(test);
+
     };
     mitter.on("form-item-created", callback);
     onUnmounted(() => {
