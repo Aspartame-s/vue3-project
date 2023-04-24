@@ -51,6 +51,7 @@
 import { defineComponent, ref } from "vue";
 import ValidateInput, { RulesProp } from "../components/ValidateInput.vue";
 import ValidateForm from "../components/ValidateForm.vue";
+import { useStore } from "vuex";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "vue-router";
 // interface emailProp {
@@ -69,10 +70,13 @@ export default defineComponent({
     const router = useRouter()
     let emailVal = ref("");
     let passwordValue = ref("");
+    const store = useStore()
+    
     const onFormSubmit = (result: boolean) => {
       console.log(result);
       if(result) {
-        router.push({name: 'column', params: {id: 1}})
+        router.push('/')
+        store.commit('login')
       }
       // console.log('inputRef', inputRef.value.validateInput())
     };

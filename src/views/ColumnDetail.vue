@@ -14,9 +14,11 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import {useRoute} from 'vue-router'
-import { columnData, postsData } from '@/data/testData';
+import { useStore } from 'vuex';
+import { storeProp } from '@/store';
+// import { columnData, postsData } from '@/data/testData';
 import PostList from './PostList.vue';
 export default defineComponent({
   components: {
@@ -25,9 +27,13 @@ export default defineComponent({
     name: '',
       setup() {
         const route = useRoute()
+        const store = useStore<storeProp>()
+        // const columnData = computed(() => store.state.column)
+        const postsData = computed(() => store.state.posts)
         const currentId = +route.params.id
-        const column = columnData.find(c => c.id == currentId)
-        const list = postsData.filter(p => p.columnId == currentId)
+        // const column = columnData.value.find(c => c.id == currentId)
+        const column = computed(() => store.state.column.find(c => c.id == currentId))
+        const list = postsData.value.filter(p => p.columnId == currentId)
         return {
           column,
           list

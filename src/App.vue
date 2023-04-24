@@ -8,13 +8,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import NavBar, { UserProps } from "./components/NavBar.vue";
+import { useStore } from "vuex";
 import "bootstrap/dist/css/bootstrap.min.css";
-const user: UserProps = {
-  isLogin: false,
-  name: "鸡汤",
-};
+import store from "./store";
+// const user: UserProps = {
+//   isLogin: true,
+//   name: "鸡汤",
+// };
 
 export default defineComponent({
   name: "App",
@@ -22,6 +24,7 @@ export default defineComponent({
     NavBar,
   },
   setup() {
+    const user = computed(() => store.state.user)
     return {
       user,
     };

@@ -18,10 +18,10 @@ const store = createStore<storeProp>({
         posts: postsData,
         user: {isLogin: false}
     },
-    // mutations: {
-    //     add(state) {
-    //         state.count++
-    //     }
-    // }
+    mutations: {
+        login(state) {
+            state.user = {isLogin: true, name: 'jth'}
+        }
+    }
 })
 export default store
