@@ -52,6 +52,7 @@ import { defineComponent, ref } from "vue";
 import ValidateInput, { RulesProp } from "../components/ValidateInput.vue";
 import ValidateForm from "../components/ValidateForm.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useRouter } from "vue-router";
 // interface emailProp {
 //   val: string;
 //   error: boolean;
@@ -65,16 +66,14 @@ export default defineComponent({
   },
   setup() {
     const inputRef = ref<any>();
-
+    const router = useRouter()
     let emailVal = ref("");
     let passwordValue = ref("");
     const onFormSubmit = (result: boolean) => {
       console.log(result);
-      // if (!result) {
-      //   emailVal.value = '';
-      //   passwordValue.value = '';
-      // }
-
+      if(result) {
+        router.push({name: 'column', params: {id: 1}})
+      }
       // console.log('inputRef', inputRef.value.validateInput())
     };
     // const updateValue = (e: string) => {

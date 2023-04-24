@@ -1,13 +1,5 @@
 <!--  -->
 <template>
-  <!-- <div class="row">
-    <div v-for="item in list" :key="item.id" class="col-4">
-      <img :src="item.avatar" />
-      <h5>{{ item.title }}</h5>
-      <p>{{ item.desc }}</p>
-      <a href="#">进入专栏</a>
-    </div>
-  </div> -->
   <div class="row">
     <div class="col-3 my-4" v-for="item in columnList" :key="item.id">
       <div class="card h-100 ">
@@ -17,7 +9,8 @@
           <p class="card-text text-left">
             {{ item.desc }}
           </p>
-          <a href="#" class="btn btn-outline-primary">进入专栏</a>
+          <!-- <router-link :to="{name: 'column', params: {id: item.id}}" class="btn btn-outline-primary">进入专栏</router-link> -->
+          <router-link :to="`/column/${item.id}`" class="btn btn-outline-primary">进入专栏</router-link>
         </div>
       </div>
     </div>
