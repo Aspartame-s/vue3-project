@@ -29,11 +29,12 @@ export default defineComponent({
         const route = useRoute()
         const store = useStore<storeProp>()
         // const columnData = computed(() => store.state.column)
-        const postsData = computed(() => store.state.posts)
+        // const postsData = computed(() => store.state.posts)
         const currentId = +route.params.id
-        // const column = columnData.value.find(c => c.id == currentId)
-        const column = computed(() => store.state.column.find(c => c.id == currentId))
-        const list = postsData.value.filter(p => p.columnId == currentId)
+        // const column = computed(() => store.state.column.find(c => c.id == currentId))
+        // const list = postsData.value.filter(p => p.columnId == currentId)
+        const column = computed(() => store.getters.getColumnById(currentId))
+        const list = computed(() => store.getters.getPostsByColumnId(currentId))
         return {
           column,
           list

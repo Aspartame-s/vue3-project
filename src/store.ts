@@ -22,6 +22,16 @@ const store = createStore<storeProp>({
         login(state) {
             state.user = {isLogin: true, name: 'jth'}
         }
+    },
+    getters: {
+        getColumnById: (state) => {
+            return function(id: number) {
+                return state.column.find(c => c.id == id)
+            }
+        },
+        getPostsByColumnId: (state) => (cid: number) => {
+            return state.posts.filter(p => p.columnId == cid)
+        }
     }
 })
 export default store

@@ -8,6 +8,11 @@
 </template>
 
 <script lang="ts">
+//1.创建createpost 页面 
+//2.改造validateinput 支持textarea
+// 3.通过store的mutation提交创建post
+
+
 import { computed, defineComponent } from "vue";
 import NavBar, { UserProps } from "./components/NavBar.vue";
 import { useStore } from "vuex";
