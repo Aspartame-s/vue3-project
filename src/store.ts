@@ -9,18 +9,21 @@ export interface storeProp {
     column: ColumnProps[];
     posts: PostProps[];
     user: userProp
-
 }
+
 
 const store = createStore<storeProp>({
     state: {
         column: columnData,
         posts: postsData,
-        user: {isLogin: false}
+        user: {isLogin: true, name: 'jth', id: 1}
     },
     mutations: {
         login(state) {
             state.user = {isLogin: true, name: 'jth'}
+        },
+        create(state, post: PostProps) {
+            state.posts.push(post)
         }
     },
     getters: {

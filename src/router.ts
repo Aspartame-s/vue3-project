@@ -22,6 +22,11 @@ const router = createRouter({
             name: 'column',
             component: ColumnDetail
         },
+        {
+            path: '/create',
+            name: 'create',
+            component: () => import('./views/CreatePost.vue')
+        },
     ]
 })
 //vue-router 往实例上混入 vuex同理

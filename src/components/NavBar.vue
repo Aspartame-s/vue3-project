@@ -14,7 +14,7 @@
         <!-- <a class="btn btn-outline-light my-2">你好{{ user.name }}</a> -->
         <dropdown :title="`你好 ${user.name}`">
           <dropdowm-item>
-            <a href="#" class="dropdown-item">新建文章</a>
+            <router-link to="/create" class="dropdown-item">新建文章</router-link>
           </dropdowm-item>
           <dropdowm-item disabled>
             <a href="#" class="dropdown-item">编辑资料</a>
@@ -48,7 +48,6 @@ export default defineComponent({
       required: true,
     },
   },
-  
 });
 </script>
 <style scoped>

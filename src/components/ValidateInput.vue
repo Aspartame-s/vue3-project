@@ -1,7 +1,21 @@
 <template>
   <div>
     <input
+      v-if="tag == 'text'"
       type="email"
+      class="form-control"
+      :class="{ 'is-invalid': inputRef.error }"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      :value="inputRef.val"
+      @blur="validateInput"
+      @input="updateValue"
+      v-bind="$attrs"
+    />
+    <textarea
+      v-else
+      rows="10"
+      type="input"
       class="form-control"
       :class="{ 'is-invalid': inputRef.error }"
       id="exampleInputEmail1"
@@ -19,17 +33,18 @@
 
 <script lang='ts'>
 import { defineComponent, PropType, reactive, onMounted } from "vue";
-import {mitter} from './ValidateForm.vue'
+import { mitter } from "./ValidateForm.vue";
 export interface RuleProp {
   type: "required" | "email";
   message: string;
 }
 interface inputProp {
-  val: string,
-  message: string,
-  error: boolean
+  val: string;
+  message: string;
+  error: boolean;
 }
 export type RulesProp = RuleProp[];
+export type inputTag = "text" | "textarea";
 const emailReg =
   /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
 export default defineComponent({
@@ -38,6 +53,10 @@ export default defineComponent({
   props: {
     rules: Array as PropType<RuleProp[]>,
     modelValue: String,
+    tag: {
+      type: String as PropType<inputTag>,
+      default: "text",
+    },
   },
   setup(props, context) {
     const inputRef: inputProp = reactive({
@@ -45,7 +64,7 @@ export default defineComponent({
       message: "",
       error: false,
     });
-   
+
     // vue3 实现双向绑定 v-model
     const updateValue = (e: Event) => {
       const targetValue = (e.target as HTMLInputElement).value;
@@ -56,6 +75,7 @@ export default defineComponent({
     };
 
     const validateInput = () => {
+      console.log("执行了");
       if (props.rules) {
         const allPassed = props.rules?.every((item) => {
           inputRef.message = item.message;
@@ -73,12 +93,13 @@ export default defineComponent({
         inputRef.error = !allPassed;
         return allPassed;
       }
-      return true
+      return true;
     };
     onMounted(() => {
+      console.log("mounted");
       // console.log(context.attrs);
       // context.emit
-      mitter.emit('form-item-created', validateInput)
+      mitter.emit("form-item-created", validateInput);
     });
     // const updateValue1 = (e: Event) => {
     //   const targetValue = (e.target as HTMLInputElement).value;
