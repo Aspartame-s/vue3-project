@@ -1,5 +1,6 @@
 import {createStore} from 'vuex'
 import { postsData, columnData, PostProps, ColumnProps } from './data/testData'
+import axios from 'axios' 
 interface userProp {
     id?: number;
     name?: string;
@@ -24,6 +25,17 @@ const store = createStore<storeProp>({
         },
         create(state, post: PostProps) {
             state.posts.push(post)
+        },
+        fetchColumn(state, rowData) {
+            state.column = rowData.data
+        }
+    },
+    actions: {
+        fetchColumn(context) {
+            axios.get('/column/list').then(res => {
+                console.log(res.data.data)
+                context.commit('fetchColumn', res.data)
+            })
         }
     },
     getters: {

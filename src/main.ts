@@ -8,7 +8,11 @@ if (process.env.NODE_ENV === 'development') {
     require ('./mock/index.ts')
 }
 
-axios.post('/table/getColumnList').then(res => {
+// axios.post('/table/getColumnList').then(res => {
+//     console.log(res)
+// })
+axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/1426996-0-default/api'
+axios.get('/column/list').then(res => {
     console.log(res)
 })
 
