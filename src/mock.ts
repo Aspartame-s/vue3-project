@@ -19,4 +19,13 @@ const produceNewsData = function (): Array<columnList> {
     }
     return newsList
 }
+
 Mock.mock('/mock/news', produceNewsData)
+
+Mock.mock('/mock/addNews', function(data: any) {
+    console.log(JSON.parse(data.body))
+    const list = produceNewsData()
+    list.push(JSON.parse(data.body))
+    console.log(list)
+    // return list
+})
