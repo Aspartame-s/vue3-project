@@ -47,9 +47,8 @@ const store = createStore<storeProp>({
                 console.log(state)
             })
         },
-        fetchPost({commit}) {
-            axios
-        }
+        // fetchPost({commit}) {
+        // }
     },
     getters: {
         getColumnById: (state) => {
