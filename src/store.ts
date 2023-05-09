@@ -46,6 +46,9 @@ const store = createStore<storeProp>({
                 commit('fetchColumnDetail', res.data)
                 console.log(state)
             })
+        },
+        fetchPost({commit}) {
+            axios
         }
     },
     getters: {
