@@ -11,10 +11,14 @@ if (process.env.NODE_ENV === 'development') {
 // axios.post('/table/getColumnList').then(res => {
 //     console.log(res)
 // })
-axios.defaults.baseURL = 'http://127.0.0.1:4523/m1/1426996-0-default/api'
-axios.get('/column/list').then(res => {
-    console.log(res)
+axios.defaults.baseURL = 'https://mock.apifox.cn/m1/1426996-0-default/api'
+axios.interceptors.request.use(config => {
+    config.headers['apifoxToken'] = 'y4zhC5sYnSGAeMmeUPNqX6ZU47tcH0Cs' 
+    return config
 })
+// axios.get(`/column/1`).then(res => {
+//     console.log(res)
+// })
 
 // axios.post('/mock/addNews', {
 //     id: 30,

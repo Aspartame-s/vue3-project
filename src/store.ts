@@ -15,7 +15,7 @@ export interface storeProp {
 
 const store = createStore<storeProp>({
     state: {
-        column: columnData,
+        column: [],
         posts: postsData,
         user: {isLogin: true, name: 'jth', id: 1}
     },
@@ -28,13 +28,23 @@ const store = createStore<storeProp>({
         },
         fetchColumn(state, rowData) {
             state.column = rowData.data
+        },
+        fetchColumnDetail(state, rowData) {
+            state.column = [rowData.data]
         }
     },
     actions: {
         fetchColumn(context) {
             axios.get('/column/list').then(res => {
-                console.log(res.data.data)
+                // console.log(res.data.data)
                 context.commit('fetchColumn', res.data)
+            })
+        },
+        fetchColumnDetail({commit, state}, cid) {
+            axios.get(`/column/${cid}`).then(res => {
+                console.log(res)
+                commit('fetchColumnDetail', res.data)
+                console.log(state)
             })
         }
     },
