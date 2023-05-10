@@ -48,6 +48,7 @@ const store = createStore<storeProp>({
             })
         },
         // fetchPost({commit}) {
+            //axios
         // }
     },
     getters: {
